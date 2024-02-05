@@ -1,18 +1,26 @@
-<<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="assets/css/style.css" type="text/css" />
     <title>Distortion</title>
 </head>
 <body>
-    <header>
+    <header class="header">
+        <div>
+            <h1>Distortion</h1>
+        </div>
         <nav>
             <ul>
-                <li></li>
-                <li></li>
-                <li></li>
+                <a href="index.php?route=home"><li>Chat</li></a>
+                <a href="templates/about.phtml"><li>A propos</li></a>
             </ul>
         </nav>
+        
     </header>
+    <main class="container">
+        <?php require "templates/$route.phtml" ?> 
+    </main>
+    
 </body>
 </html>

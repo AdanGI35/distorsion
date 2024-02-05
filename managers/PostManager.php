@@ -21,15 +21,13 @@ class PostManager extends AbstractManager {
 
 	 public function sendPost(array $post) : void{
 	
-		$query = $this->db->prepare('INSERT INTO posts (id, channel_id, content, timestamp) VALUES ()');
+		$query = $this->db->prepare('INSERT INTO posts (id, channel_id, content, timestamp) VALUES (:content, :channel_id, :timestamp )');
 		
 		$parameters = [
 			'content' => $post->getContent(),
-			'timestamp' => date('Y-m-d H:i:s'),
 			'channel_id' => $post->getIdChannel(),
+			'timestamp' => date('Y-m-d H:i:s'),
 		];
 		$last = $query->execute($parameters);
 	}
-
-
 }
