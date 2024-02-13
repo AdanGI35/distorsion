@@ -1,6 +1,10 @@
 <?php
+
 session_start();
+
 require "config/autoload.php";
 
-$newRouter = new Router();
-$newRouter->handleRequest($_GET);
+$router = new Router();
+
+$router->handleRequest($_GET);
+

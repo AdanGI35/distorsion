@@ -1,0 +1,26 @@
+<?php
+
+date_default_timezone_set('Europe/Paris');
+$currentDateTime = date("d/m/Y H:i:s");
+$date = DateTime::createFromFormat('d/m/Y H:i:s', $currentDateTime);
+$formattedDate = $date->format('Y-m-d H:i:s');
+
+?>
+
+    <form action="index.php?route=check-message" method="POST" class="form-message">
+        <fieldset>
+            <label for="message">Message</label>
+            <input type="text" name="message" id="message" required/>
+        </fieldset>
+        <input type=hidden value="<?= $formattedDate ?>" name="DateTime" id="DateTime"/>
+        
+        <input type=hidden value="<?= isset($_SESSION['selectedCategoryId']) ? $_SESSION['selectedCategoryId'] : '' ?>" name="idForCategories"/>
+        <input type=hidden value="<?= isset($_SESSION['selectedSalonId']) ? $_SESSION['selectedSalonId'] : '' ?>"  name="idForSalon"/>
+        <?php 
+        // Affichez les valeurs des sessions pour le débogage
+        // var_dump($_SESSION['selectedSalonId']);
+        // var_dump($_SESSION['selectedCategoryId']);
+        ?>
+        <button type="submit" name="message-submit" id="btn-form">Valider</button>
+    </form>
+

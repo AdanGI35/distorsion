@@ -1,74 +1,47 @@
 <?php
-class Router
-{
-    public function __construct()
-    {
 
-    }
+class Router {
+    public function __construct() {}
+
     public function handleRequest(array $get)
     {
-        if(isset($get["route"]) && $get["route"] === "chat")
-        {
-            $controller = new ChatController();
+        $controller = new PageController();
+        $ac = new AuthController();
+        
+        // Récupérer la route depuis le tableau $get
+        $route = isset($get['route']) ? $get['route'] : '';
 
-            if(isset($get["channel"]))
-            {
-                $controller->channel($get["channel"]);
-            }
-            else
-            {
-                $controller->chat();
-            }
-        }
-        else if(!isset($get["route"]))
-        {
-            $controller = new ChatController();
-            $controller->chat();
-        }
-        else if(isset($get["route"]) && ($get["route"] === "create-category"))
-        {
-            $controller = new ChatController();
-            $controller->createCategory();
-        }
-        else if(isset($get["route"]) && ($get["route"] === "create-channel"))
-        {
-            $controller = new ChatController();
-            $controller->createChannel();
-        }
-        else if(isset($get["route"]) && ($get["route"] === "send-message"))
-        {
-            $controller = new ChatController();
-            $controller->sendMessage();
-        }
-        else if(isset($get["route"]) && ($get["route"] === "login"))
-        {
-            $controller = new AuthController();
-            $controller->login();
-        }
-        else if(isset($get["route"]) && ($get["route"] === "check-login"))
-        {
-            $controller = new AuthController();
-            $controller->checkLogin();
-        }
-        else if(isset($get["route"]) && ($get["route"] === "register"))
-        {
-            $controller = new AuthController();
-            $controller->register();
-        }
-        else if(isset($get["route"]) && ($get["route"] === "check-register"))
-        {
-            $controller = new AuthController();
-            $controller->checkRegister();
-        }
-        else if(isset($get["route"]) && ($get["route"] === "logout"))
-        {
-            $controller = new AuthController();
-            $controller->logout();
-        }
-        else
-        {
-            $controller = new ChatController();
-            $controller->chat();
+        switch ($route) {
+            case 'categories':
+                $controller->categories();
+                break;
+            case 'home':
+                $controller->home();
+                break;
+            case 'message':
+                $controller->message();
+                break;
+            case 'salon':
+                $controller->salon();
+                break;
+            case 'a-propos':
+                $controller->about();
+                break;
+            case 'check-categories':
+                $ac->checkForCategories();
+                break;
+            case 'check-salon':
+                $ac->checkForSalon();
+                break;
+            case 'check-message':
+                $ac->checkForMessage();
+                break;
+            case '404':
+                $controller->p404();
+                break;
+            default:
+                $controller->home();
+                break;
         }
     }
 }

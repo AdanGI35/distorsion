@@ -1,60 +1,26 @@
-<?php
-$instanceCategoryManager = new CategoryManager();
-$categoriesToDisplay = $instanceCategoryManager->findAll();
-?>
-<div class="container mt-5">
-    <form method="POST" action="logic/createCategory.php">
-        <div class="form-group">
-            <label for="name">Nom de la catégorie :</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="Entrez le nom de la catégorie">
-        </div>
-        <button type="submit" class="btn btn-primary">Soumettre</button>
-    </form>
-</div>
-<div class="container mt-5">
-    <form method="POST" action="logic/createChannel.php">
-        <div class="form-group">
-            <label for="name">Nom du channel :</label>
-            <input type="hidden" name="id_category" value="5" />
-            <input type="text" class="form-control" id="name" name="name" placeholder="Entrez le nom du channel">
-        </div>
-        <button type="submit" class="btn btn-primary">Soumettre</button>
-    </form>
-</div>
-<?php
-$instancePostManager = new PostManager();
-$postToDisplay = $instancePostManager->findAll();
-$instanceChannelController = new ChannelController();
-$channelsToDisplay = $instanceChannelController->showChannels();
-foreach ($channelsToDisplay as $channel) {
-?>
-    <p><?= $channel->getName() ?> in <?= $channel->getCategory()->getName() ?></p>
-    </br>
-<?php
-}
-
-foreach ($postToDisplay as $post) {
-?>
-    <div class="card mb-3">
-        <div class="card-header">
-            <strong>Channel:</strong> <?php echo $post->getChannel()->getName(); ?>
-            <br>
-            <strong>Category:</strong> <?php echo $post->getChannel()->getCategory()->getName(); ?>
-        </div>
-        <div class="card-body">
-            <p class="card-text"><?php echo $post->getContent(); ?></p>
+<?php 
+    isset($_POST['salonId']) ? $_SESSION['selectedSalonId'] = $_POST['salonId'] : "";
+    isset($_POST['salonName']) ? $_SESSION['salonName'] = $_POST['salonName'] : ""; 
+    isset($_POST['addSalon-submit']) ? $_SESSION['selectedCategoryId'] = $_POST['categoryId'] : "";
+?> 
+    <div class="categories">
+        <?php require "templates/categories.phtml"; ?> 
+        <div class="categoryAndSalon">
+                <?php if(isset($_POST['addSalon-submit'])){ $_SESSION['selectedCategoryId']; require "templates/salon.phtml"; }  ?>
+                
+            <section class="category">
+                <?php $categoryManager = new HomeManager; ?>
+                
+                <div class="listCategory">
+                    <p><?= $categoryManager->listCategoriesAndSalon();?></p>
+                </div>
+            </section>
         </div>
     </div>
-<?php
-}
-?>
-<div class="container mt-5">
-    <h2>Formulaire de Post</h2>
-    <form>
-        <div class="form-group">
-            <label for="postContent">Contenu du Post</label>
-            <textarea class="form-control" id="postContent" rows="5" placeholder="Entrez votre message ici" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Publier</button>
-    </form>
-</div>
+    
+    <section class="messages">
+        <h2>Salons <?= $_SESSION['salonName'] ?></h2>
+       <?php require "templates/message.phtml"; ?>
+       <?php $messageManager = new HomeManager; ?>
+       <p><?= $messageManager->listMessage();?></p>
+    </section>

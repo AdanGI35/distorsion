@@ -1,0 +1,12 @@
+
+<section class="form-salon">
+    <h1>Salon</h1>
+    <form action="index.php?route=check-salon" method="POST">
+        <fieldset>
+            <label for="">Nom du Salon</label>
+            <input type="text" name="name-salon" id="name-salon"/>
+        </fieldset>
+        <input type="hidden" value="<?= isset($_SESSION['selectedCategoryId']) ? $_SESSION['selectedCategoryId'] : '' ?>" name="categoriesId"/>
+        <button type="submit" name="salon-submit" id="btn-form">Valider</button>
+    </form>
+</section>

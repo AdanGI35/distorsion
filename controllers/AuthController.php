@@ -6,63 +6,66 @@ class AuthController {
         
     }
 
-    public function checkForCategories(): void {
-        $categories = new Categories(); 
+    public function checkForCategories() : void {
+        $categories = new Categories(); //Managers
         
-        if (isset($_POST['categories-submit'])) {
+        if(isset($_POST['categories-submit'])) {
             $categories->createCategories($_POST);
             
-            $newCategory = new Category($_POST['categories']);
+            $newCategory = new Category($_POST['categories']); //Model
             
-            if ($newCategory->getId() !== null) {
+            if($newCategory->getId() !== null) {
                 $_SESSION["categories"] = $newCategory;
                 header("Location: index.php?route=home");
-                exit;
             } else {
                 header("Location: index.php?route=home");
-                exit;
             }
         }
     }
     
-    public function checkForChannel(): void {
-        $channel = new Channel();
+    public function checkForSalon() : void {
+        $salon = new Salons();
         
-        if (isset($_POST['channel-submit'])) {
+        if(isset($_POST['salon-submit'])) {
             
-            $Channel->createChannel($_POST);
+            $salon->createSalon($_POST);
             
-            $newChannel = new Channel($_POST['name-channel']);
             
-            if ($newChannel->getId() !== null) {
-                $_SESSION["channel"] = $newChannel;
+            $newSalon = new Salon($_POST['name-salon']); //Model
+            
+            
+            if($newSalon->getId() !== null) {
+                
+                $_SESSION["salon"] = $newSalon;
                 header("Location: index.php?route=home");
-                exit;
             } else {
-                header("Location: index.php?route=home");
-                exit;
-            }
-        }
-    }
 
-    public function checkForPost(): void {
-        $post = new Post(); 
-        
-        if (isset($_POST['post-submit'])) {
-            
-            $post->sendPost($_POST);
-            
-            $newPost = new Posts($_POST['post'], $_POST['DateTime'], $_POST['idForSalon'], $_POST['idForCategories']); 
-            
-            if ($newPost->getId() !== null) {
-                $_SESSION['Post'] = $newPost;
                 header("Location: index.php?route=home");
-                exit;
-            } else {
-                header("Location: index.php?route=home");
-                exit;
             }
         }
     }
+    
+    public function checkForMessage() : void{
+        $message = new Message(); //Managers
+        
+        if(isset($_POST['message-submit'])){
+            
+            $message->sendMessage($_POST);
+            
+            $newMessage = new Messages($_POST['message'], $_POST['DateTime'],$_POST['idForSalon'], $_POST['idForCategories']); //Model
+            
+            if($newMessage->getId() !== null){
+                $_SESSION['message'] = $newMessage;
+                
+                 header("Location: index.php?route=home");
+            } else {
+
+                header("Location: index.php?route=home");
+            }
+        }
+    }
+    
 }
+
+
 ?>

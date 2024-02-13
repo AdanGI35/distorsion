@@ -1,0 +1,113 @@
+*{
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 62.5%;
+}
+body{
+    font-size: 1.6rem;
+    margin:0;
+    background-color: rgb(29, 11, 75);
+    color: #fff;
+}
+
+fieldset{
+    border: none;
+}
+
+a{
+    color: #fff;
+    list-style: none;
+    text-decoration:none;
+    cursor: pointer;
+}
+
+/***********HEADER***********/
+h1{
+    text-align: center;
+    font-size: 2.5rem;
+}
+
+.nav ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2em;
+}
+
+.nav ul a:hover{
+    color:  rgb(106, 81, 164) ;
+}
+
+/***********MAIN***********/
+.container{
+    display: grid;
+    grid-template-columns: 20% 80%;
+
+}
+
+/***********MAIN GAUCHE***********/
+.categories{
+    margin-left: 1.5em;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: rgb(106, 81, 164) black;
+    height: 80vh;
+    
+}
+
+.categoryAndBtn, .form-message{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.salons{
+    margin-left: 1em;
+}
+
+.category{
+    display: flex;
+    flex-direction: column;
+}
+.listCategory{
+    display: flex;
+    flex-direction: column;
+}
+
+.addCategory-form{
+    
+}
+
+/***********MAIN MESSAGE***********/
+
+.form-message{
+    background-color: rgb(106, 81, 164);
+    position: absolute;
+    bottom:0;
+}
+
+.messages {
+    margin-left: 3em;
+}
+
+.form-message input{
+    width: 1000px;
+}
+/***********Bouton add*******/
+
+#btn{
+    border-radius: 50%;
+    background-color: rgb(106, 81, 164);
+    color: #fff;
+    cursor: pointer;
+}
+
+#btn-form{
+    border-radius: 2rem;
+    background-color: rgb(106, 81, 164);
+    color: #fff;
+    cursor: pointer;
+}

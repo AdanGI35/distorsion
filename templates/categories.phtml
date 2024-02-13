@@ -1,0 +1,20 @@
+<div class="block-category">
+    <article class="categoryAndBtn">
+        <h1>Categories</h1>
+        <form action="" method="POST" class="form-addCategory"> 
+        <button type="submit" name="addCategory" id="btn" >+</button> </form>
+    </article>
+    <?php 
+    if(isset($_POST['addCategory'])){
+    ?>
+    <form action="index.php?route=check-categories" method="POST" class="form-categories">
+        <fieldset>
+            <label for="">Nom de la categories</label>
+            <input type="text" name="categories"/>
+        </fieldset>
+        <button type="submit" name="categories-submit" id="btn-form">Valider</button>
+    </form>
+    <?php
+    }
+    ?>
+</div>
